@@ -32,7 +32,7 @@ if __name__ == '__main__':
     # button7location = pyautogui.locateOnScreen('nft.png', confidence=0.9)
     # local_btn = os.path.join(cwd, "nft.png")
     while i < 3:
-        perform_actions()
+
         publish_time = datetime.datetime.now()+datetime.timedelta(seconds=15)
         time_string = publish_time.strftime("%H:%M:%S")
         time.sleep(2)
@@ -54,6 +54,7 @@ if __name__ == '__main__':
                 waiting_time = datetime.timedelta(minutes=minutes, seconds=seconds)
                 publish_time += waiting_time
                 time_string = publish_time.strftime("%H:%M:%S")
+                perform_actions()
                 pyautogui.write(choosen_one, interval=0.01)
                 pyautogui.press('enter')
                 time.sleep(2)
