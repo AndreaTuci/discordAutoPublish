@@ -6,15 +6,27 @@ import datetime
 import requests
 import json
 import os
+import PIL as p
+import numpy as n
 
 
-
+def crop():
+    image = pyautogui.screenshot()
+    print(image)
+    image = n.asarray(image)
+    print(type(image), image.shape)
 
 
 def click_btn(btnname):
     btnlocation = pyautogui.locateOnScreen(btnname, confidence=0.9)
     pyautogui.moveTo(btnlocation)
     pyautogui.leftClick()
+
+def click_last_btn(btnname):
+    *_, last = pyautogui.locateAllOnScreen(btnname, confidence=0.9)
+    pyautogui.moveTo(last)
+    pyautogui.leftClick()
+
 
 def perform_actions():
     click_btn('local.png')
@@ -25,16 +37,24 @@ def perform_actions():
     click_btn('message_declan.png')
 
 if __name__ == '__main__':
+    limit = int(input("Quanti link vuoi pubblicare? "))
+    if limit > 10:
+        limit = 10
+    print(f'Pubblico {limit} link')
+    shutdown = input("Vuoi spegnere il pc alla fine? (y/n) ")
+    time.sleep(2)
     i = 0
     url = "https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=30"
     time.sleep(5)
+
     # cwd = os.getcwd()
     # button7location = pyautogui.locateOnScreen('nft.png', confidence=0.9)
     # local_btn = os.path.join(cwd, "nft.png")
-    while i < 3:
 
-        publish_time = datetime.datetime.now()+datetime.timedelta(seconds=15)
-        time_string = publish_time.strftime("%H:%M:%S")
+    publish_time = datetime.datetime.now() + datetime.timedelta(seconds=15)
+    time_string = publish_time.strftime("%H:%M:%S")
+    while i < 3:
+        print(f'Entro nel ciclo {i} - Ora sono le {datetime.datetime.now()} ({publish_time})')
         time.sleep(2)
         while True:
             actual_time = datetime.datetime.now().strftime("%H:%M:%S")
@@ -49,8 +69,10 @@ if __name__ == '__main__':
                 choosen_one = random.choice(permalink_list)
                 minutes = random.randrange(30, 35, 1)
                 seconds = random.randrange(0, 59, 1)
+
                 # milliseconds = random.randrange(0, 999, 1)
                 # microseconds = random.randrange(0, 999, 1)
+
                 waiting_time = datetime.timedelta(minutes=minutes, seconds=seconds)
                 publish_time += waiting_time
                 time_string = publish_time.strftime("%H:%M:%S")
@@ -58,12 +80,17 @@ if __name__ == '__main__':
                 pyautogui.write(choosen_one, interval=0.01)
                 pyautogui.press('enter')
                 time.sleep(2)
-                click_btn('publish.png')
+                click_last_btn('publish.png')
                 print(f'{choosen_one} \n\n Pubblicato alle: {actual_time} \n\n Prossimo alle {time_string} ')
                 time.sleep(1)
                 click_btn('fufuncity.png')
                 i += 1
                 break
+
+    if shutdown == 'n':
+        exit()
+    else:
+        os.system("shutdown /s /t 1")
 
 # web_hook = 'https://discordapp.com/api/webhooks/896848295895379999/6ZooX1oJOPFrLXTsVDTXhzX25226Glz3Tkxvd9r8H5g3Gv3uj-QaakRiYW35US4xpr7U'
 
