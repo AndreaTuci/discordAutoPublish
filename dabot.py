@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     publish_time = datetime.datetime.now() + datetime.timedelta(seconds=15)
     time_string = publish_time.strftime("%H:%M:%S")
-    while i < 3:
+    while i < limit:
         print(f'Entro nel ciclo {i} - Ora sono le {datetime.datetime.now()} ({publish_time})')
         time.sleep(2)
         while True:
