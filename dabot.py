@@ -9,17 +9,24 @@ import json
 import os
 import PIL as p
 import numpy as n
+import win32gui
+import win32con
 
+
+# Opzioni per il logging
 
 logging.basicConfig(filename='log.txt', level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
 logger=logging.getLogger(__name__)
 
-def crop():
-    image = pyautogui.screenshot()
-    print(image)
-    image = n.asarray(image)
-    print(type(image), image.shape)
+# Classe che contiene i valori per accendere / spegnere il monitor
+
+class Mode():
+    STAND_BY = 1
+    TURN_ON = -1
+    TURN_OFF = 2
+
+SC_MONITORPOWER = 0xF170
 
 
 def click_btn(btnname):
@@ -40,6 +47,7 @@ def perform_actions():
     pyautogui.leftClick()
     time.sleep(1)
     click_btn('message_declan.png')
+
 
 if __name__ == '__main__':
     try:
@@ -64,6 +72,8 @@ if __name__ == '__main__':
             while True:
                 actual_time = datetime.datetime.now().strftime("%H:%M:%S")
                 if actual_time == time_string:
+                    pyautogui.press('esc')
+                    time.sleep(5)
                     response = requests.request("GET", url)
                     data = json.loads(response.content)
                     permalink_list = []
@@ -90,18 +100,23 @@ if __name__ == '__main__':
                     time.sleep(5)
                     click_btn('fufuncity.png')
                     i += 1
+                    win32gui.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SYSCOMMAND, SC_MONITORPOWER,
+                                         Mode.TURN_OFF)
                     break
 
         if shutdown == 'y':
             os.system("shutdown /s /t 1")
         else:
             exit()
+
     except Exception as e:
         logger.error(e)
-        # with open('log.txt', 'w') as f:
-        #     error = logger.error(e)
-        #     for line in error:
-        #         f.write(line)
+        with open('log.txt', 'w') as f:
+            error = logger.error(e)
+            for line in error:
+                f.write(line)
+
+
 # web_hook = 'https://discordapp.com/api/webhooks/896848295895379999/6ZooX1oJOPFrLXTsVDTXhzX25226Glz3Tkxvd9r8H5g3Gv3uj-QaakRiYW35US4xpr7U'
 
 # r = requests.post(web_hook, data=json.dumps(values), headers={'Content-type': 'application/json'})
