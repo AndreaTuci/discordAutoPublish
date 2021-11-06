@@ -29,6 +29,25 @@ class Mode():
 SC_MONITORPOWER = 0xF170
 
 
+def start_up():
+    os.startfile(r"C:\Users\User\AppData\Local\Discord\app-1.0.9003\\Discord.exe")
+    time.sleep(10)
+    opening_message = True
+    while True:
+        if pyautogui.locateOnScreen('fufuncity.png', confidence=0.9):
+            click_btn('fufuncity.png')
+            break
+        else:
+            if opening_message:
+                print('Sto aprendo Discord...')
+                opening_message = False
+        time.sleep(1)
+
+    time.sleep(1)
+    click_btn('markeplace.png')
+    time.sleep(2)
+
+
 def click_btn(btnname):
     btnlocation = pyautogui.locateOnScreen(btnname, confidence=0.9)
     pyautogui.moveTo(btnlocation)
@@ -50,15 +69,17 @@ def perform_actions():
 
 
 if __name__ == '__main__':
+
     try:
         limit = int(input("Quanti link vuoi pubblicare? "))
         if limit > 10:
             limit = 10
         print(f'Pubblico {limit} link')
         shutdown = input("Vuoi spegnere il pc alla fine? (y/n) ")
+        start_up()
         i = 0
         url = "https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=30"
-        time.sleep(5)
+        # time.sleep(5)
 
         # cwd = os.getcwd()
         # button7location = pyautogui.locateOnScreen('nft.png', confidence=0.9)
@@ -99,6 +120,7 @@ if __name__ == '__main__':
                     print(f'{choosen_one} \n\n Pubblicato alle: {actual_time} \n\n Prossimo alle {time_string} ')
                     time.sleep(5)
                     click_btn('fufuncity.png')
+                    time.sleep(2)
                     i += 1
                     win32gui.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SYSCOMMAND, SC_MONITORPOWER,
                                          Mode.TURN_OFF)

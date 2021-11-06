@@ -1,4 +1,0 @@
-2021-11-04 19:32:26,138 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.opensea.io:443
-2021-11-04 19:32:27,013 DEBUG urllib3.connectionpool https://api.opensea.io:443 "GET /api/v1/assets?order_direction=desc&offset=0&limit=30 HTTP/1.1" 200 None
-2021-11-04 20:05:47,116 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.opensea.io:443
-2021-11-04 20:05:48,044 DEBUG urllib3.connectionpool https://api.opensea.io:443 "GET /api/v1/assets?order_direction=desc&offset=0&limit=30 HTTP/1.1" 200 None
