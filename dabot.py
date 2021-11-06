@@ -11,7 +11,7 @@ import PIL as p
 import numpy as n
 import win32gui
 import win32con
-
+import sys
 
 # Opzioni per il logging
 
@@ -49,21 +49,42 @@ def start_up():
 
 
 def click_btn(btnname):
-    btnlocation = pyautogui.locateOnScreen(btnname, confidence=0.9)
-    pyautogui.moveTo(btnlocation)
-    pyautogui.leftClick()
+    message = True
+    while True:
+        if pyautogui.locateOnScreen(btnname, confidence=0.9):
+            btnlocation = pyautogui.locateOnScreen(btnname, confidence=0.9)
+            pyautogui.moveTo(btnlocation)
+            pyautogui.leftClick()
+            break
+        else:
+            if message:
+                print('In attesa...')
+                message = False
+        time.sleep(1)
+
 
 def click_last_btn(btnname):
-    *_, last = pyautogui.locateAllOnScreen(btnname, confidence=0.9)
-    pyautogui.moveTo(last)
-    pyautogui.leftClick()
+    message = True
+    while True:
+        if pyautogui.locateOnScreen(btnname, confidence=0.9):
+            *_, last = pyautogui.locateAllOnScreen(btnname, confidence=0.9)
+            pyautogui.moveTo(last)
+            pyautogui.leftClick()
+            break
+        else:
+            if message:
+                print('In attesa...')
+                message = False
+        time.sleep(1)
+
 
 
 def perform_actions():
     click_btn('local.png')
-    time.sleep(1.5)
-    pyautogui.moveTo(36, 108)
-    pyautogui.leftClick()
+    time.sleep(2)
+    click_btn('declan.png')
+    # pyautogui.moveTo(36, 108)
+    # pyautogui.leftClick()
     time.sleep(1)
     click_btn('message_declan.png')
 
@@ -129,7 +150,7 @@ if __name__ == '__main__':
         if shutdown == 'y':
             os.system("shutdown /s /t 1")
         else:
-            exit()
+            sys.exit()
 
     except Exception as e:
         logger.error(e)
