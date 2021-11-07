@@ -1,0 +1,11 @@
+2021-11-07 14:46:56,298 ERROR __main__ not enough values to unpack (expected at least 1, got 0)
+2021-11-07 16:30:07,124 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.opensea.io:443
+2021-11-07 16:30:08,756 DEBUG urllib3.connectionpool https://api.opensea.io:443 "GET /api/v1/assets?order_direction=desc&offset=0&limit=30 HTTP/1.1" 200 None
+2021-11-07 16:37:36,120 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.opensea.io:443
+2021-11-07 16:37:37,521 DEBUG urllib3.connectionpool https://api.opensea.io:443 "GET /api/v1/assets?order_direction=desc&offset=0&limit=30 HTTP/1.1" 200 None
+2021-11-07 16:40:26,109 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.opensea.io:443
+2021-11-07 16:40:29,322 DEBUG urllib3.connectionpool https://api.opensea.io:443 "GET /api/v1/assets?order_direction=desc&offset=0&limit=30 HTTP/1.1" 200 None
+2021-11-07 16:46:58,130 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.opensea.io:443
+2021-11-07 16:46:59,395 DEBUG urllib3.connectionpool https://api.opensea.io:443 "GET /api/v1/assets?order_direction=desc&offset=0&limit=30 HTTP/1.1" 200 None
+2021-11-07 16:51:41,133 DEBUG urllib3.connectionpool Starting new HTTPS connection (1): api.opensea.io:443
+2021-11-07 16:51:41,902 DEBUG urllib3.connectionpool https://api.opensea.io:443 "GET /api/v1/assets?order_direction=desc&offset=0&limit=30 HTTP/1.1" 200 None

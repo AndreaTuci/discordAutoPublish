@@ -30,6 +30,7 @@ SC_MONITORPOWER = 0xF170
 
 
 def start_up():
+    print('Funzione start_up')
     os.startfile(r"C:\Users\User\AppData\Local\Discord\app-1.0.9003\\Discord.exe")
     time.sleep(10)
     opening_message = True
@@ -49,44 +50,60 @@ def start_up():
 
 
 def click_btn(btnname):
+    print('click_btn', btnname)
+    clicked = False
     message = True
     while True:
         if pyautogui.locateOnScreen(btnname, confidence=0.9):
-            btnlocation = pyautogui.locateOnScreen(btnname, confidence=0.9)
-            pyautogui.moveTo(btnlocation)
-            pyautogui.leftClick()
-            break
+            if clicked == False:
+                btnlocation = pyautogui.locateOnScreen(btnname, confidence=0.9)
+                pyautogui.moveTo(btnlocation)
+                pyautogui.leftClick()
+                clicked = True
+                # print('click')
+                # print('ora esco dal ciclo')
+                time.sleep(3)
+                break
         else:
             if message:
                 print('In attesa...')
                 message = False
         time.sleep(1)
-
+    # print('ora esco dalla funzione')
 
 def click_last_btn(btnname):
+    print('click_last_btn', btnname)
+    clicked = False
     message = True
     while True:
         if pyautogui.locateOnScreen(btnname, confidence=0.9):
-            *_, last = pyautogui.locateAllOnScreen(btnname, confidence=0.9)
-            pyautogui.moveTo(last)
-            pyautogui.leftClick()
-            break
+            if clicked == False:
+                *_, last = pyautogui.locateAllOnScreen(btnname, confidence=0.9)
+                pyautogui.moveTo(last)
+                pyautogui.leftClick()
+                clicked = True
+                # print('click')
+                # print('ora esco dal ciclo')
+                time.sleep(1)
+                break
         else:
             if message:
                 print('In attesa...')
                 message = False
         time.sleep(1)
-
+    # print('ora esco dalla funzione')
 
 
 def perform_actions():
+    # print('Funzione perform_actions_1')
     click_btn('local.png')
-    time.sleep(2)
-    click_btn('declan.png')
-    # pyautogui.moveTo(36, 108)
-    # pyautogui.leftClick()
-    time.sleep(1)
+    time.sleep(3)
+    # print('Funzione perform_actions_2')
+    click_btn('daclan_note.png')
+    time.sleep(3)
+    # print('Funzione perform_actions_3')
     click_btn('message_declan.png')
+    # print('fine actions')
 
 
 if __name__ == '__main__':
@@ -100,16 +117,10 @@ if __name__ == '__main__':
         start_up()
         i = 0
         url = "https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=30"
-        # time.sleep(5)
-
-        # cwd = os.getcwd()
-        # button7location = pyautogui.locateOnScreen('nft.png', confidence=0.9)
-        # local_btn = os.path.join(cwd, "nft.png")
-
         publish_time = datetime.datetime.now() + datetime.timedelta(seconds=15)
         time_string = publish_time.strftime("%H:%M:%S")
         while i < limit:
-            print(f'Entro nel ciclo {i} - Ora sono le {datetime.datetime.now()} ({publish_time})')
+            print(f'Link {i+1}/{limit} - Sono le {datetime.datetime.now()}, pubblico alle {publish_time}')
             time.sleep(2)
             while True:
                 actual_time = datetime.datetime.now().strftime("%H:%M:%S")
@@ -126,19 +137,16 @@ if __name__ == '__main__':
                     choosen_one = random.choice(permalink_list)
                     minutes = random.randrange(30, 35, 1)
                     seconds = random.randrange(0, 59, 1)
-
-                    # milliseconds = random.randrange(0, 999, 1)
-                    # microseconds = random.randrange(0, 999, 1)
-
                     waiting_time = datetime.timedelta(minutes=minutes, seconds=seconds)
                     publish_time += waiting_time
                     time_string = publish_time.strftime("%H:%M:%S")
                     perform_actions()
+                    # print('ora scrivo')
                     pyautogui.write(choosen_one, interval=0.01)
                     pyautogui.press('enter')
                     time.sleep(5)
                     click_last_btn('publish.png')
-                    print(f'{choosen_one} \n\n Pubblicato alle: {actual_time} \n\n Prossimo alle {time_string} ')
+                    print(f'{choosen_one} \n\n Pubblicato alle: {actual_time} \n\n')
                     time.sleep(5)
                     click_btn('fufuncity.png')
                     time.sleep(2)
