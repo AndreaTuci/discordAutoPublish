@@ -166,19 +166,3 @@ if __name__ == '__main__':
             error = logger.error(e)
             for line in error:
                 f.write(line)
-
-
-# web_hook = 'https://discordapp.com/api/webhooks/896848295895379999/6ZooX1oJOPFrLXTsVDTXhzX25226Glz3Tkxvd9r8H5g3Gv3uj-QaakRiYW35US4xpr7U'
-
-# r = requests.post(web_hook, data=json.dumps(values), headers={'Content-type': 'application/json'})
-
-# i = 0
-#
-# for link in permalink_list:
-#     time.sleep(5)
-#     values = {
-#         'username': f'Wapto_000{str(i)}',
-#         'content': permalink_list[i]
-#     }
-#     r = requests.post(web_hook, data=json.dumps(values), headers={'Content-type': 'application/json'})
-#     i += 1
